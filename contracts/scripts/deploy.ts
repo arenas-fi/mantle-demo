@@ -4,10 +4,6 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 async function main() {
-  const atomicaRpc = process.env.NETWORK === 'somniaTestnet' ? process.env.ATOMICA_SOMNIA_TESTNET_RPC : process.env.ATOMICA_BOBA_RPC;
-  if (!atomicaRpc) {
-    throw new Error("ATOMICA_BOBA_RPC or ATOMICA_SOMNIA_TESTNET_RPC is not set in .env file");
-  }
   const Implementation = await ethers.getContractFactory(
     "CreditDelegationVault"
   );
