@@ -1,0 +1,70 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: CreditDelegationVaultFactory
+    network: mantle
+    source:
+      address: "0xC5bB946750bd9E410343E8aA7BE648771ff477e0"
+      abi: CreditDelegationVaultFactory
+      startBlock: 90078275
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+        - Owner
+        - Manager
+        - DebtToken
+      abis:
+        - name: CreditDelegationVaultFactory
+          file: ./abis/CreditDelegationVaultFactory.json
+        - name: CreditDelegationVault
+          file: ./abis/CreditDelegationVault.json
+        - name: AarenasDebtToken
+          file: ./abis/ArenasDebtToken.json
+      eventHandlers:
+        - event: VaultCreated(indexed address,indexed address)
+          handler: handleVaultCreated
+      file: ./src/creditDelegationVaultFactory.ts
+templates:
+  - name: CreditDelegationVault
+    kind: ethereum/contract
+    network: mantle
+    source:
+      abi: CreditDelegationVault
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+      abis:
+        - name: CreditDelegationVault
+          file: ./abis/CreditDelegationVault.json
+      eventHandlers:
+        - event: Borrow(indexed address,indexed address,uint256)
+          handler: handleBorrow
+      file: ./src/creditDelegationVault.ts
+  - name: ArenasDebtToken
+    kind: ethereum
+    network: mantle
+    source:
+      abi: ArenasDebtToken
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Vault
+      abis:
+        - name: ArenasDebtToken
+          file: ./abis/ArenasDebtToken.json
+        - name: CreditDelegationVault
+          file: ./abis/CreditDelegationVault.json
+      eventHandlers:
+        - event: BorrowAllowanceDelegated(indexed address,indexed address,indexed address,uint256)
+          handler: handleBorrowAllowance
+      file: ./src/arenasDebtToken.ts

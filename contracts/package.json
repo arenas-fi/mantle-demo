@@ -1,0 +1,24 @@
+{
+  "name": "hardhat-project",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "REPORT_GAS=true npx hardhat test",
+    "verify": "npx hardhat verify --network sepolia",
+    "deploy": "npx hardhat run scripts/deploy.ts --network mantle",
+    "slither": "slither .",
+    "compile": "npx hardhat compile"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "hardhat": "^2.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@metamask/eth-sig-util": "^5.1.0",
+    "@openzeppelin/contracts": "^4.8.3",
+    "dotenv": "^16.0.3",
+    "ethereumjs-util": "^7.1.5"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

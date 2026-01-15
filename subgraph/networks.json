@@ -1,0 +1,8 @@
+{
+  "mantle": {
+    "CreditDelegationVaultFactory": {
+      "address": "0xC5bB946750bd9E410343E8aA7BE648771ff477e0",
+      "startBlock": 90078275
+    }
+  }
+}
